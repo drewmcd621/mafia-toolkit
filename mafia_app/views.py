@@ -12,7 +12,7 @@ def game(request, game):
     try:
         gameI = Game.objects.get(gameName=game)
     except Game.DoesNotExist:
-        raise Http404('you didn\'t say the magic word')
+        raise Http404('No game called {0}'.format(game))
     return render(request, 'game/index.html',
     {
     'game':gameI,
@@ -22,7 +22,7 @@ def players(request, game):
     try:
         gameI = Game.objects.get(gameName=game)
     except Game.DoesNotExist:
-        raise Http404('you didn\'t say the magic word')
+        raise Http404('No game called {0}'.format(game))
     return render(request, 'game/players.html',
     {
     'game':gameI,
@@ -32,7 +32,7 @@ def comments(request, game):
     try:
         gameI = Game.objects.get(gameName=game)
     except Game.DoesNotExist:
-        raise Http404('you didn\'t say the magic word')
+        raise Http404('No game called {0}'.format(game))
     return render(request, 'game/comments.html',
     {
     'game':gameI,
@@ -42,7 +42,7 @@ def phases(request, game):
     try:
         gameI = Game.objects.get(gameName=game)
     except Game.DoesNotExist:
-        raise Http404('you didn\'t say the magic word')
+        raise Http404('No game called {0}'.format(game))
     return render(request, 'game/phases.html',
     {
     'game':gameI,

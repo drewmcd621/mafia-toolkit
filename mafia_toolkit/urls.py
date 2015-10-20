@@ -12,15 +12,15 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
 
     #Main game dashboard
-    url(r'^g/(?P<game>\S+)/', views.game, name='game'),
+    url(r'^g/(?P<game>[^\s\/]+)/$', views.game, name='game'),
 
     #List players in game
-    url(r'^g/(?P<game>\S+)/players', views.players, name='players'),
+    url(r'^g/(?P<game>[^\s\/]+)/players/$', views.players, name='players'),
 
     #list phases in a game
-    url(r'^g/(?P<game>\S+)/phases', views.phases, name='phases'),
+    url(r'^g/(?P<game>[^\s\/]+)/phases/$', views.phases, name='phases'),
 
     #List comments in a game
-    url(r'^g/(?P<game>\S+)/phases', views.comments, name='comments'),
+    url(r'^g/(?P<game>[^\s\/]+)/comments/$', views.comments, name='comments'),
 
 ]
