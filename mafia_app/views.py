@@ -10,45 +10,68 @@ def index(request):
 
 #game pages
 def game(request, game):
-    gameI = getGame(request, game)
-    return render(request, 'game/index.html',
+    gameO = getGame(request, game)
+    if not gameO:
+        return redirect('index')
+
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        if password == gameO.password:
+            request.session['auth_' + gameO.gameName] = True
+    r = render(request, 'game/index.html',
     {
-    'game':gameI,
+    'game':gameO,
     })
+    return checkAuth(request, gameO, r)
 
 def password(request, game):
-    return  render(request, 'index.html', {})
+    gameO = getGame(request, game)
+    if not gameO:
+        return redirect('index')
+    return  render(request, 'game/password.html',
+    {
+        'game':gameO,
+    })
 
 def players(request, game):
-    gameI = getGame(request, game)
-    return render(request, 'game/players.html',
+    gameO = getGame(request, game)
+    if not gameO:
+        return redirect('index')
+    r = render(request, 'game/players.html',
     {
-    'game':gameI,
+    'game':gameO,
     })
+    return checkAuth(request, gameO, r)
 
 def comments(request, game):
-    gameI = getGame(request, game)
-    return render(request, 'game/comments.html',
+    gameO = getGame(request, game)
+    if not gameO:
+        return redirect('index')
+    r = render(request, 'game/comments.html',
     {
-    'game':gameI,
+    'game':gameO,
     })
+    return checkAuth(request, gameO, r)
 
 def phases(request, game):
-    gameI = getGame(request, game)
-    return render(request, 'game/phases.html',
+    gameO = getGame(request, game)
+    if not gameO:
+        return redirect('index')
+    r = render(request, 'game/phases.html',
     {
-    'game':gameI,
+    'game':gameO,
     })
+    return checkAuth(request, gameO, r)
 
 
 #common functions
 
-def getGame(request, gameName, render):
+def getGame(request, gameName):
     try:
-        gameI = Game.objects.get(gameName=gameName)
+        gameO = Game.objects.get(gameName=gameName)
     except Game.DoesNotExist:
         return null
-    return gameI
+    return gameO
 
 def checkAuth(request, game, render):
     if game.password:
