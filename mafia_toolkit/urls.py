@@ -8,11 +8,17 @@ urlpatterns = [
     #Admin
     url(r'^admin/', include(admin.site.urls)),
 
+
+
+
     #Show game create screen
     url(r'^$', views.index, name='index'),
 
     #Main game dashboard
     url(r'^g/(?P<game>[^\s\/]+)/$', views.game, name='game'),
+
+    #game login
+    url(r'^g/(?P<game>[^\s\/]+)/login/$', views.password, name='password'),
 
     #List players in game
     url(r'^g/(?P<game>[^\s\/]+)/players/$', views.players, name='players'),

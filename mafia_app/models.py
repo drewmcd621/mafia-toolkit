@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Game(models.Model):
-    gameName = models.CharField(max_length=200)
+    gameName = models.CharField(max_length=200, unique=True)
     password = models.CharField(max_length=100, null=True, blank=True)
 
 
