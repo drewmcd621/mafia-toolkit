@@ -11,7 +11,8 @@ class Player(models.Model):
         ('U', 'Unknown'),
         ('M', 'Mafia'),
         ('T', 'Town'),
-        ('O', 'Other')
+        ('I', 'Independent'),
+        ('O', 'Other'),
     )
     game = models.ForeignKey(Game)
     username = models.CharField(max_length=200, blank=True)
