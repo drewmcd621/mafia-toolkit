@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.http import Http404
 
 from mafia_app.models import Game
-from mafia_app.models import Players
+from mafia_app.models import Player
 
 def index(request):
     return  render(request, 'index.html', {})
@@ -38,14 +38,28 @@ def players(request, game):
     gameO = getGame(request, game)
     if not gameO:
         return redirect('index')
-    playersO =
-
-
+    players = Player.objects.filter(game = gameO.id)
     r = render(request, 'game/players.html',
     {
     'game':gameO,
+    'players':players
     })
     return checkAuth(request, gameO, r)
+
+def player(request, game, player):
+    gameO = getGame(request, game)
+    if not gameO:
+        return redirect('index')
+    try:
+        playerO = Player.objects.get(username = player, game = gameO.id)
+    except Player.DoesNotExist:
+        return redirect('game', game = gameO.gameName )
+    r = render(request, 'game/player.html',{
+        'game':gameO,
+        'player':playerO,
+    })
+    return checkAuth(request, gameO, r)
+
 
 def comments(request, game):
     gameO = getGame(request, game)

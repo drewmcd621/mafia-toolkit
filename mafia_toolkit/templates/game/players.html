@@ -4,15 +4,18 @@
 {% include "game/game.toolbar.html" with segment="players" %}
   <h1>Players</h1>
   <table class="table table-striped">
-    <th>
-      <td>Username</td>
-      <td>Alignment</td>
-      <td>Role</td>
-      <td>Notes</td>
-    </th>
+    <tr>
+      <th>Username</th>
+      <th>Alignment</th>
+      <th>Role</th>
+      <th>Notes</th>
+    </tr>
     {% for p in players %}
     <tr>
-      <td>{{ p.username }}</td>
+      <td><a href="{% url 'player' game=game.gameName player=p.username %}">{{ p.username }}</a></td>
+      <td>{{p.get_alignment_display}}</td>
+      <td>{{p.role}}</td>
+      <td>{{p.notes}}</td>
     </td>
     {% endfor %}
   </table>

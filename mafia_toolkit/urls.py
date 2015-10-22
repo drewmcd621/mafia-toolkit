@@ -20,6 +20,9 @@ urlpatterns = [
     #List players in game
     url(r'^g/(?P<game>[^\s\/]+)/players/$', views.players, name='players'),
 
+    #single player
+    url(r'^g/(?P<game>[^\s\/]+)/players/(?P<player>[^\s\/]+)$', views.player, name='player'),
+
     #list phases in a game
     url(r'^g/(?P<game>[^\s\/]+)/phases/$', views.phases, name='phases'),
 

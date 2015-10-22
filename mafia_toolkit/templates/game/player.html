@@ -1,0 +1,6 @@
+{% extends "master.html" %}
+
+{% block content %}
+{% include "game/game.toolbar.html" with segment="players" %}
+  <h1>{{player.username}}</h1>
+{% endblock %}
