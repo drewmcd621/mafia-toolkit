@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.http import Http404
 
 from mafia_app.models import Game
+from mafia_app.models import Players
 
 def index(request):
     return  render(request, 'index.html', {})
@@ -37,6 +38,9 @@ def players(request, game):
     gameO = getGame(request, game)
     if not gameO:
         return redirect('index')
+    playersO =
+
+
     r = render(request, 'game/players.html',
     {
     'game':gameO,

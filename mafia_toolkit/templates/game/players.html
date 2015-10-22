@@ -3,4 +3,17 @@
 {% block content %}
 {% include "game/game.toolbar.html" with segment="players" %}
   <h1>Players</h1>
+  <table class="table table-striped">
+    <th>
+      <td>Username</td>
+      <td>Alignment</td>
+      <td>Role</td>
+      <td>Notes</td>
+    </th>
+    {% for p in players %}
+    <tr>
+      <td>{{ p.username }}</td>
+    </td>
+    {% endfor %}
+  </table>
 {% endblock %}
