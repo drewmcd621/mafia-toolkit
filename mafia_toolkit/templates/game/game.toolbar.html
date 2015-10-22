@@ -1,5 +1,16 @@
 <nav class="navbar navbar-default">
   <ul class="nav navbar-nav">
-    <li class=""><a href="{% url 'game' game.gameName %}">Game</a></li>
+    <li class="{% if segment == "game" %}active{% endif %}">
+      <a href="{% url 'game' game.gameName %}">Game</a>
+    </li>
+    <li class="{% if segment == "players" %}active{% endif %}">
+      <a href="{% url 'players' game.gameName %}">Players</a>
+    </li>
+    <li class="{% if segment == "phases" %}active{% endif %}">
+      <a href="{% url 'phases' game.gameName %}">Phases</a>
+    </li>
+    <li class="{% if segment == "comments" %}active{% endif %}">
+      <a href="{% url 'comments' game.gameName %}">Comments</a>
+    </li>
   </ul>
 </nav>
