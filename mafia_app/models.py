@@ -7,9 +7,17 @@ class Game(models.Model):
 
 
 class Player(models.Model):
+    ALIGNMENT = (
+        ('U', 'Unknown'),
+        ('M', 'Mafia'),
+        ('T', 'Town'),
+        ('O', 'Other')
+    )
     game = models.ForeignKey(Game)
     username = models.CharField(max_length=200, blank=True)
-    redditID = models.CharField(max_length=50, blank=True)
+    alignment = models.CharField(max_length=1, choices=ALIGNMENT, default='U')
+    role = models.CharField(max_length=50, blank=True)
+    notes = models.TextField(blank=True)
 
 class Phase(models.Model):
     PHASE_TYPE = (
