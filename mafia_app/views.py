@@ -4,6 +4,7 @@ from django.http import Http404
 
 from mafia_app.models import Game
 from mafia_app.models import Player
+from reddit import *
 
 def index(request):
     return  render(request, 'index.html', {})
@@ -65,9 +66,11 @@ def comments(request, game):
     gameO = getGame(request, game)
     if not gameO:
         return redirect('index')
+    c = parse_comments(gameO, '3pqtma')
     r = render(request, 'game/comments.html',
     {
     'game':gameO,
+    'comments':c
     })
     return checkAuth(request, gameO, r)
 
