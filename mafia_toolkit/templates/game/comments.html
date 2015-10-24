@@ -2,5 +2,20 @@
 
 {% block content %}
 {% include "game/game.toolbar.html" with segment="comments" %}
-  <h1>Game comments / search</h1>
+  <h1>Game comments</h1>
+  <table class="table table-striped">
+    <tr>
+      <th>Phase</th>
+      <th>Player</th>
+      <th>Comment</th>
+      <th>Link</th>
+    </tr>
+  {% for c in comments %}
+    <tr>
+      <td>{{c.phase.get_phaseType_display}} {{c.phase.number}}</td>
+      <td>{{c.player.username}}
+      <td>{{ c.text }}</td>
+      <td><a href="{{c.redditLink}}?context=100">Link</a>
+    </tr>
+  {% endfor %}
 {% endblock %}

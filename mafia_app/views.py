@@ -68,9 +68,11 @@ def comments(request, game):
         return redirect('index')
     phaseO = Phase.objects.first()
     parse_comments(gameO)
+    comments = Comment.objects.filter(game=gameO.id)
     r = render(request, 'game/comments.html',
     {
     'game':gameO,
+    'comments':comments
     })
     return checkAuth(request, gameO, r)
 
@@ -91,8 +93,9 @@ def phases(request, game):
             text = post.selftext
             phaseType = form.cleaned_data['phase_type']
             phaseNumber = form.cleaned_data['phase_number']
+            url = post.url #technically we already have this but getting it from reddit ensures the correct form
             #TODO: duplicate checking
-            p = Phase(game=gameO, number=phaseNumber, title=title, phaseType=phaseType, redditID=rID, text=text)
+            p = Phase(game=gameO, number=phaseNumber, title=title, phaseType=phaseType, redditID=rID, text=text, redditLink=url)
             p.save()
 
     phases = Phase.objects.filter(game = gameO.id)

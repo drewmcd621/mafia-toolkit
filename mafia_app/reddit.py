@@ -36,6 +36,7 @@ def parse_comment_thread(gameO, phaseO):
             else:
                 edit = datetime.fromtimestamp(edit)
             time = datetime.fromtimestamp(c.created_utc)
+            url = phaseO.redditLink + rID + "/"
 
             text = c.body
             if Comment.objects.filter(redditID=rID).exists():
@@ -47,5 +48,5 @@ def parse_comment_thread(gameO, phaseO):
                 com.save()
             else:
                 #New comment
-                com = Comment(game=gameO, player=playerO, phase=phaseO, redditID=rID, text=text, timestamp=time, editedTime=edit)
+                com = Comment(game=gameO, player=playerO, phase=phaseO, redditID=rID, text=text, timestamp=time, editedTime=edit, redditLink=url, updated=datetime.now())
                 com.save()

@@ -34,6 +34,7 @@ class Phase(models.Model):
     title = models.CharField(max_length=50, blank=True)
     phaseType =  models.CharField(max_length=1, choices=PHASE_TYPE)
     redditID = models.CharField(max_length=50, blank=True)
+    redditLink = models.URLField(max_length=100, blank=True)
     text = models.TextField(blank=True, null=True)
 
 #general game comments
@@ -45,6 +46,7 @@ class Comment(models.Model):
     text = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(blank=True, null=True)
     editedTime = models.DateTimeField(blank=True, null=True)
+    redditLink = models.URLField(max_length=100, blank=True)
     updated = models.DateTimeField(default=datetime.now())
 
 #votes are special comments in the voting thread
