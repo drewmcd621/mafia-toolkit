@@ -6,13 +6,22 @@ from datetime import datetime
 from models import *
 
 
+def getPRAW():
+    return praw.Reddit("Mafia Toolkit - /u/SystemOutPrintln")
+
+def get_post_info(url):
+    r = getPRAW()
+    post = r.get_submission(url)
+    return post
+
+
 def parse_comments(gameO):
     for p in Phase.objects.all():
         parse_comment_thread(gameO, p)
 
 
 def parse_comment_thread(gameO, phaseO):
-    r = praw.Reddit("Mafia Toolkit - /u/SystemOutPrintln")
+    r = getPRAW()
     post = r.get_submission(submission_id=phaseO.redditID)
     comms = praw.helpers.flatten_tree(post.comments)
     ret = []

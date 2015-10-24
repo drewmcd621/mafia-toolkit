@@ -76,8 +76,25 @@ def comments(request, game):
 
 def phases(request, game):
     gameO = getGame(request, game)
+
     if not gameO:
         return redirect('index')
+    #If we get a post
+    post = None
+    if request.method == 'POST':
+        form = addPhaseForm(request.POST)
+        if form.is_valid():
+            url = form.cleaned_data['reddit_url']
+            post = get_post_info(url)
+            title = post.title
+            rID = post.id
+            text = post.selftext
+            phaseType = form.cleaned_data['phase_type']
+            phaseNumber = form.cleaned_data['phase_number']
+            #TODO: duplicate checking
+            p = Phase(game=gameO, number=phaseNumber, title=title, phaseType=phaseType, redditID=rID, text=text)
+            p.save()
+
     r = render(request, 'game/phases.html',
     {
     'game':gameO,

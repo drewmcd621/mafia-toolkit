@@ -1,4 +1,6 @@
 from django import forms
+from mafia_app.models import *
+
 from django.core.exceptions import ValidationError
 from django.core.validators import *
 
@@ -9,7 +11,5 @@ class addPhaseForm(forms.Form):
             code="Invalid url"
         ),
     ])
-
-
-
-#validators
+    phase_type = forms.ChoiceField(label='Phase', choices=Phase._meta.get_field('phaseType').choices)
+    phase_number = forms.IntegerField(label='Day')
