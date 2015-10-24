@@ -1,0 +1,10 @@
+{% extends "master.html" %}
+
+{% block content %}
+{% include "game/game.toolbar.html" with segment="phases" %}
+  <form method="POST" action="{% url 'phases' game=game.gameName %}">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Save" />
+  </form>
+{% endblock %}

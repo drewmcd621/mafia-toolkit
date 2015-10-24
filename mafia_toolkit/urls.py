@@ -26,6 +26,9 @@ urlpatterns = [
     #list phases in a game
     url(r'^g/(?P<game>[^\s\/]+)/phases/$', views.phases, name='phases'),
 
+    #add a phase
+    url(r'^g/(?P<game>[^\s\/]+)/phases/add$', views.addphase, name='phases-add'),
+
     #List comments in a game
     url(r'^g/(?P<game>[^\s\/]+)/comments/$', views.comments, name='comments'),
 

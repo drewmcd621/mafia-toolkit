@@ -2,9 +2,9 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import Http404
 
-from mafia_app.models import Game
-from mafia_app.models import Player
-from reddit import *
+from mafia_app.models import *
+from mafia_app.forms import *
+from mafia_app.reddit import *
 
 def index(request):
     return  render(request, 'index.html', {})
@@ -66,11 +66,11 @@ def comments(request, game):
     gameO = getGame(request, game)
     if not gameO:
         return redirect('index')
-    c = parse_comments(gameO, '3pqtma')
+    phaseO = Phase.objects.first()
+    parse_comments(gameO)
     r = render(request, 'game/comments.html',
     {
     'game':gameO,
-    'comments':c
     })
     return checkAuth(request, gameO, r)
 
@@ -81,6 +81,18 @@ def phases(request, game):
     r = render(request, 'game/phases.html',
     {
     'game':gameO,
+    })
+    return checkAuth(request, gameO, r)
+
+def addphase(request, game):
+    gameO = getGame(request, game)
+    if not gameO:
+        return redirect('index')
+    f = addPhaseForm()
+    r = render(request, 'game/phases-add.html',
+    {
+    'game':gameO,
+    'form':f,
     })
     return checkAuth(request, gameO, r)
 

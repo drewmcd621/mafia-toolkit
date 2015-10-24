@@ -3,7 +3,4 @@
 {% block content %}
 {% include "game/game.toolbar.html" with segment="comments" %}
   <h1>Game comments / search</h1>
-  {% for c in comments %}
-  <p><b>{{c.author}}:</b> {{c.body}}</p>
-  {% endfor %}
 {% endblock %}
