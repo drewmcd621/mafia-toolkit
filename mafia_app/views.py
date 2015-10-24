@@ -95,9 +95,11 @@ def phases(request, game):
             p = Phase(game=gameO, number=phaseNumber, title=title, phaseType=phaseType, redditID=rID, text=text)
             p.save()
 
+    phases = Phase.objects.filter(game = gameO.id)
     r = render(request, 'game/phases.html',
     {
     'game':gameO,
+    'phases':phases,
     })
     return checkAuth(request, gameO, r)
 

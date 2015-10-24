@@ -3,4 +3,18 @@
 {% block content %}
 {% include "game/game.toolbar.html" with segment="phases" %}
   <h1>Phases</h1>
+  <table class="table table-striped">
+    <tr>
+      <th>Phase</th>
+      <th></th>
+      <th>Title</th>
+    </tr>
+    {% for p in phases %}
+    <tr>
+      <td>{{ p.get_phaseType_display }}</td>
+      <td>{{p.number}}</td>
+      <td>{{p.title}}</td>
+    </td>
+    {% endfor %}
+  </table>
 {% endblock %}
